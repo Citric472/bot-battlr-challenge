@@ -1,0 +1,64 @@
+/* src/App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* BotCollection Component */
+.botCollectionContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.botCard {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+}
+
+.enlistButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.enlistButton:hover {
+  background-color: #45a049;
+}
+
+/* YourBotArmy Component */
+.yourBotArmyContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.botCard {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+}
+
+.releaseButton,
+.dischargeButton {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.releaseButton:hover,
+.dischargeButton:hover {
+  background-color: #d32f2f;
+}
+
