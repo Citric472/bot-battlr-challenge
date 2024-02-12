@@ -1,31 +1,45 @@
-// src/components/BotCollection.js
 import React, { useState, useEffect } from 'react';
-import { getBots } from '../services/api';
+import { Link } from 'react-router-dom';
+import { getBots, enlistBot } from '../services/api';
+import BotCard from './BotCard';
+import './BotCollection.css'; // Make sure to create this CSS file
 
 const BotCollection = ({ onEnlist }) => {
   const [bots, setBots] = useState([]);
 
   useEffect(() => {
-    const fetchBots = async () => {
-      const botsData = await getBots();
-      setBots(botsData);
+    const fetchData = async () => {
+      try {
+        const data = await getBots();
+        setBots(data);
+      } catch (error) {
+        console.error('Error fetching bots:', error);
+      }
     };
 
-    fetchBots();
+    fetchData();
   }, []);
 
   return (
-    <div>
-      <h2>Bot Collection</h2>
+    <div className="bot-collection">
       {bots.map((bot) => (
-        <div key={bot.id}>
-          <p>{bot.name}</p>
-          <button onClick={() => onEnlist(bot)}>Enlist</button>
-        </div>
+        <BotCard key={bot.id} bot={bot} onEnlist={onEnlist} />
       ))}
     </div>
   );
 };
 
 export default BotCollection;
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,64 +1,92 @@
-/* src/App.css */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f4f4f4;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+.App {
+  text-align: center;
   padding: 20px;
 }
 
-/* BotCollection Component */
-.botCollectionContainer {
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+}
+
+/* Bot Collection Styles */
+.bot-collection {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.botCard {
+.bot-card {
+  background-color: #fff;
   border: 1px solid #ddd;
-  padding: 10px;
+  border-radius: 8px;
   margin: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.enlistButton {
-  background-color: #4caf50;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
+.bot-card img {
+  max-width: 100%;
+  border-radius: 4px;
 }
 
-.enlistButton:hover {
-  background-color: #45a049;
+.bot-card h3 {
+  margin-top: 10px;
 }
 
-/* YourBotArmy Component */
-.yourBotArmyContainer {
+/* Your Bot Army Styles */
+.your-bot-army {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.botCard {
-  border: 1px solid #ddd;
-  padding: 10px;
+.enlisted-bot-card {
+  background-color: #ffebee;
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
   margin: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.releaseButton,
-.dischargeButton {
-  background-color: #f44336;
-  color: white;
-  padding: 8px 16px;
-  margin-right: 8px;
-  border: none;
-  cursor: pointer;
+.enlisted-bot-card img {
+  max-width: 100%;
+  border-radius: 4px;
 }
 
-.releaseButton:hover,
-.dischargeButton:hover {
-  background-color: #d32f2f;
+.enlisted-bot-card h3 {
+  margin-top: 10px;
 }
+
+/* Bot Specs Styles */
+.bot-specs {
+  text-align: left;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bot-specs img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+/* Add more styles as needed */
+
 

@@ -1,0 +1,22 @@
+.your-bot-army {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.enlisted-bot-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+}
+
+.enlisted-bot-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.enlisted-bot-card button {
+  margin-top: 8px;
+  cursor: pointer;
+}

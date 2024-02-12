@@ -1,14 +1,14 @@
-// src/components/YourBotArmy.js
 import React from 'react';
+import './YourBotArmy.css'; // Make sure to create this CSS file
 
-const YourBotArmy = ({ army, onRelease, onDischarge }) => {
+const YourBotArmy = ({ enlistedBots, onRelease, onDischarge }) => {
   return (
-    <div>
-      <h2>Your Bot Army</h2>
-      {army.map((bot) => (
-        <div key={bot.id}>
-          <p>{bot.name}</p>
-          <button onClick={() => onRelease(bot)}>Release</button>
+    <div className="your-bot-army">
+      {enlistedBots.map((bot) => (
+        <div key={bot.id} className="enlisted-bot-card">
+          <img src={bot.avatar_url} alt={bot.name} />
+          <h3>{bot.name}</h3>
+          <button onClick={() => onRelease(bot.id)}>Release</button>
           <button onClick={() => onDischarge(bot.id)}>Discharge</button>
         </div>
       ))}
@@ -17,4 +17,10 @@ const YourBotArmy = ({ army, onRelease, onDischarge }) => {
 };
 
 export default YourBotArmy;
+
+
+
+
+
+
 

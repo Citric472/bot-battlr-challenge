@@ -1,31 +1,82 @@
+const BASE_URL = 'http://localhost:8001';
 
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8001'; // Update with your JSON server URL
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-});
-
+// Fetch all bots
 export const getBots = async () => {
   try {
-    const response = await api.get('/bots');
-    return response.data;
+    const response = await fetch(`${BASE_URL}/bots`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch bots');
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching bots:', error);
     throw error;
   }
 };
 
-export const deleteBot = async (botId) => {
+// Enlist a bot
+export const enlistBot = async (botId) => {
   try {
-    const response = await api.delete(`/bots/${botId}`);
-    return response.data;
+    const response = await fetch(`${BASE_URL}/enlist-bot/${botId}`, {
+      method: 'POST',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to enlist bot');
+    }
   } catch (error) {
-    console.error('Error deleting bot:', error);
+    console.error('Error enlisting bot:', error);
     throw error;
   }
 };
 
-// You can add more API functions here for creating, updating, etc., based on your application needs.
+// Release a bot
+export const releaseBot = async (botId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/release-bot/${botId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to release bot');
+    }
+  } catch (error) {
+    console.error('Error releasing bot:', error);
+    throw error;
+  }
+};
+
+// Discharge a bot
+export const dischargeBot = async (botId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/bots/${botId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to discharge bot');
+    }
+  } catch (error) {
+    console.error('Error discharging bot:', error);
+    throw error;
+  }
+};
+
+// Get bot details by ID
+export const getBotById = async (botId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/bots/${botId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch bot details');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching bot details:', error);
+    throw error;
+  }
+};
 
