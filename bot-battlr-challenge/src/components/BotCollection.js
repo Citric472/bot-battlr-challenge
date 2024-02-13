@@ -1,8 +1,8 @@
+// src/components/BotCollection.js
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getBots, enlistBot } from '../services/api';
-import BotCard from './BotCard';
-import './BotCollection.css'; // Make sure to create this CSS file
+
+import { getBots} from '../services/api';
+import './BotCollection.css';
 
 const BotCollection = ({ onEnlist }) => {
   const [bots, setBots] = useState([]);
@@ -20,16 +20,32 @@ const BotCollection = ({ onEnlist }) => {
     fetchData();
   }, []);
 
+  const handleEnlist = (botId) => {
+    onEnlist(botId);
+  };
+
   return (
     <div className="bot-collection">
       {bots.map((bot) => (
-        <BotCard key={bot.id} bot={bot} onEnlist={onEnlist} />
+        <div key={bot.id} className="bot-card">
+          <img src={bot.avatar_url} alt={bot.name} />
+          <h3>{bot.name}</h3>
+          <p>Health: {bot.health}</p>
+          <p>Class: {bot.bot_class}</p>
+          <p>Armor: {bot.armor}</p>
+          <p>Created At: {new Date(bot.created_at).toLocaleString()}</p>
+          <p>Updated At: {new Date(bot.updated_at).toLocaleString()}</p>
+          <button onClick={() => handleEnlist(bot.id)}>Enlist</button>
+        </div>
       ))}
     </div>
   );
 };
 
 export default BotCollection;
+
+
+
 
 
 

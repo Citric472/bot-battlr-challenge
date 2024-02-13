@@ -1,62 +1,80 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
-import { getBots, enlistBot, releaseBot, dischargeBot } from './services/api';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
-import './App.css';
+import { getBots, enlistBot, dischargeBot } from './services/api';
 
-const App = () => {
+function App() {
   const [bots, setBots] = useState([]);
-  const [enlistedBots, setEnlistedBots] = useState([]);
+  const [army, setArmy] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getBots();
-      setBots(data);
+    const fetchBots = async () => {
+      try {
+        const botsData = await getBots();
+        setBots(botsData);
+      } catch (error) {
+        console.error('Error fetching bots:', error);
+      }
     };
 
-    fetchData();
+    fetchBots();
   }, []);
 
-  const handleEnlist = async (botId) => {
+  const handleEnlist = async (bot) => {
     try {
-      await enlistBot(botId);
-      setEnlistedBots((prevEnlistedBots) => [...prevEnlistedBots, botId]);
+      await enlistBot(bot.id);
+      setArmy((prevArmy) => [...prevArmy, bot]);
     } catch (error) {
       console.error('Error enlisting bot:', error);
     }
   };
 
-  const handleRelease = async (botId) => {
-    try {
-      await releaseBot(botId);
-      setEnlistedBots((prevEnlistedBots) => prevEnlistedBots.filter((id) => id !== botId));
-    } catch (error) {
-      console.error('Error releasing bot:', error);
-    }
+  const handleRelease = (bot) => {
+    setArmy((prevArmy) => prevArmy.filter((enlistedBot) => enlistedBot.id !== bot.id));
   };
 
   const handleDischarge = async (botId) => {
     try {
       await dischargeBot(botId);
-      setEnlistedBots((prevEnlistedBots) => prevEnlistedBots.filter((id) => id !== botId));
+      setArmy((prevArmy) => prevArmy.filter((enlistedBot) => enlistedBot.id !== botId));
     } catch (error) {
       console.error('Error discharging bot:', error);
     }
   };
 
   return (
-    <div className="app">
-      <h1>Bot Army Management</h1>
-      <YourBotArmy enlistedBots={enlistedBots} onRelease={handleRelease} onDischarge={handleDischarge} />
-      <h1>Bot Collection</h1>
-      
-      <BotCollection bots={bots} onEnlist={handleEnlist} />
-      <h1>Your Bot Army</h1>
-    </div>
+    <Router>
+      <div>
+        <h1>Bot Army Management</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <BotCollection bots={bots} onEnlist={handleEnlist} />
+                <YourBotArmy army={army} onRelease={handleRelease} onDischarge={handleDischarge} />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
+
+
+
+
+
+
+
+
+
+
 
 
 

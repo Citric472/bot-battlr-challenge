@@ -24,7 +24,8 @@ export const enlistBot = async (botId) => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to enlist bot');
+      const errorMessage = await response.text(); // Get the error message from the response
+      throw new Error(`Failed to enlist bot: ${errorMessage}`);
     }
   } catch (error) {
     console.error('Error enlisting bot:', error);
@@ -51,7 +52,7 @@ export const releaseBot = async (botId) => {
 // Discharge a bot
 export const dischargeBot = async (botId) => {
   try {
-    const response = await fetch(`${BASE_URL}/bots/${botId}`, {
+    const response = await fetch(`${BASE_URL}/discharge-bot/${botId}`, {
       method: 'DELETE',
     });
 
@@ -79,4 +80,7 @@ export const getBotById = async (botId) => {
     throw error;
   }
 };
+
+
+
 
