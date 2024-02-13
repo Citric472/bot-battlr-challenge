@@ -1,31 +1,10 @@
-// src/components/BotCollection.js
-import React, { useState, useEffect } from 'react';
-
-import { getBots} from '../services/api';
+import React from 'react';
 import './BotCollection.css';
 
-const BotCollection = ({ onEnlist }) => {
-  const [bots, setBots] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getBots();
-        setBots(data);
-      } catch (error) {
-        console.error('Error fetching bots:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleEnlist = (botId) => {
-    onEnlist(botId);
-  };
-
+const BotCollection = ({ bots, onEnlist }) => {
   return (
     <div className="bot-collection">
+      
       {bots.map((bot) => (
         <div key={bot.id} className="bot-card">
           <img src={bot.avatar_url} alt={bot.name} />
@@ -35,7 +14,7 @@ const BotCollection = ({ onEnlist }) => {
           <p>Armor: {bot.armor}</p>
           <p>Created At: {new Date(bot.created_at).toLocaleString()}</p>
           <p>Updated At: {new Date(bot.updated_at).toLocaleString()}</p>
-          <button onClick={() => handleEnlist(bot.id)}>Enlist</button>
+          <button onClick={() => onEnlist(bot)}>Enlist</button>
         </div>
       ))}
     </div>
@@ -43,6 +22,9 @@ const BotCollection = ({ onEnlist }) => {
 };
 
 export default BotCollection;
+
+
+
 
 
 

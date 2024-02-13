@@ -24,7 +24,7 @@ export const enlistBot = async (botId) => {
     });
 
     if (!response.ok) {
-      const errorMessage = await response.text(); // Get the error message from the response
+      const errorMessage = await response.text();
       throw new Error(`Failed to enlist bot: ${errorMessage}`);
     }
   } catch (error) {

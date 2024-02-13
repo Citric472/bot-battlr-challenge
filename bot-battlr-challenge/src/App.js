@@ -1,9 +1,9 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
-import { getBots, enlistBot, dischargeBot } from './services/api';
+import { getBots, dischargeBot } from './services/api';
+
 
 function App() {
   const [bots, setBots] = useState([]);
@@ -22,12 +22,9 @@ function App() {
     fetchBots();
   }, []);
 
-  const handleEnlist = async (bot) => {
-    try {
-      await enlistBot(bot.id);
+  const handleEnlist = (bot) => {
+    if (!army.find((enlistedBot) => enlistedBot.id === bot.id)) {
       setArmy((prevArmy) => [...prevArmy, bot]);
-    } catch (error) {
-      console.error('Error enlisting bot:', error);
     }
   };
 
@@ -48,6 +45,7 @@ function App() {
     <Router>
       <div>
         <h1>Bot Army Management</h1>
+        <h2>Bot Collection</h2>
         <Routes>
           <Route
             path="/"
@@ -65,6 +63,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
 
 
 
